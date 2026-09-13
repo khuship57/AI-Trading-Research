@@ -9,7 +9,9 @@ interface AskPanelProps {
 const SAMPLE_QUESTIONS = [
   "Does buying NIFTY after a sharp fall work?",
   "Does buying NIFTY 50 after a 3% single-day decline generate positive 5-day returns?",
-  "What happens if we buy NIFTY after a 2% drop and hold for 10 days?"
+  "What happens if we buy NIFTY after a 2% drop and hold for 10 days?",
+  "What happens if we buy NIFTY 50 after a 3% single-day crash and hold for 10 trading days?",
+  "Is dip buying NIFTY after a 2% drop more profitable over a short 1-day hold versus a 5-day hold?"
 ];
 
 export const AskPanel: React.FC<AskPanelProps> = ({ onAnalyze, isLoading }) => {
