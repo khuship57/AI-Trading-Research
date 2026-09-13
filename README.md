@@ -124,3 +124,17 @@ To guarantee backtest validity, the engine enforces **strict look-ahead bias pre
 4. **Friction Deductions**: $0.10\%$ transaction fees + $0.05\%$ execution slippage are deducted from every trade.
 
 ---
+
+## 📑 Supporting Documentation
+
+* 📄 [THINKING_NOTE.md](file:///d:/AI%20Full%20stack/THINKING_NOTE.md) — Problem interpretation, provenance design, and trade-off decisions.
+* 📄 [AI_USAGE_NOTE.md](file:///d:/AI%20Full%20stack/AI_USAGE_NOTE.md) — AI tools used, personal decisions, and rejected suggestions.
+
+---
+
+## 💡 What I Would Improve With More Time
+
+* **Historical Data Provider**: Connect to live NSE data feeds (YFinance or AlphaVantage).
+* **Statistical Significance Testing**: Add t-statistics and p-values for forward return distributions.
+* **Volatility Regime Filtering**: Filter trades using India VIX levels.
+* **Strategy Comparison**: Compare dip-buying against unconditional benchmark buy-and-hold returns.
