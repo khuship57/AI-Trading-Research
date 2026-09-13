@@ -105,7 +105,7 @@ Frontend application available at: `http://localhost:3000`
 ### Backend (`backend/.env`)
 ```env
 GROQ_API_KEY=your_groq_api_key_here
-GROQ_MODEL=llama-3.3-70b-versatile
+GROQ_MODEL=groq/compound-mini
 ```
 
 ### Frontend (`frontend/.env.local`)
