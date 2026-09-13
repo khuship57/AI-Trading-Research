@@ -50,7 +50,7 @@ Groq LLM        Pydantic        Pandas Engine
 
 * **Frontend**: Next.js 14, TypeScript, Tailwind CSS, Recharts, Lucide Icons
 * **Backend**: Python 3.11, FastAPI, Pydantic v2, Uvicorn
-* **AI Provider**: Groq API (`llama-3.3-70b-versatile`)
+* **AI Provider**: Groq API (`groq/compound-mini`)
 * **Data & Backtesting**: Pandas, NumPy, NIFTY 50 Daily OHLC Dataset
 
 ---
