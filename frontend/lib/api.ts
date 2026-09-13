@@ -5,10 +5,14 @@ import {
   LearningResult
 } from "./types";
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+const getApiBaseUrl = (): string => {
+  const url = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+  return url.replace(/\/+$/, "");
+};
 
 export async function analyzeQuestion(question: string): Promise<ExperimentAnalysis> {
-  const response = await fetch(`${API_BASE_URL}/analyze`, {
+  const baseUrl = getApiBaseUrl();
+  const response = await fetch(`${baseUrl}/analyze`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ question }),
@@ -16,7 +20,7 @@ export async function analyzeQuestion(question: string): Promise<ExperimentAnaly
 
   if (!response.ok) {
     const errorData = await response.json().catch(() => ({ detail: "Failed to analyze question" }));
-    throw new Error(errorData.detail || "Server error during question analysis");
+    throw new Error(errorData.detail || `Server error (${response.status}) during question analysis`);
   }
 
   return response.json();
@@ -26,7 +30,8 @@ export async function finalizeExperiment(
   analysis: ExperimentAnalysis,
   userClarifications: Record<string, any>
 ): Promise<ResearchExperiment> {
-  const response = await fetch(`${API_BASE_URL}/finalize-experiment`, {
+  const baseUrl = getApiBaseUrl();
+  const response = await fetch(`${baseUrl}/finalize-experiment`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ analysis, user_clarifications: userClarifications }),
@@ -34,14 +39,15 @@ export async function finalizeExperiment(
 
   if (!response.ok) {
     const errorData = await response.json().catch(() => ({ detail: "Failed to finalize experiment" }));
-    throw new Error(errorData.detail || "Server error during experiment finalization");
+    throw new Error(errorData.detail || `Server error (${response.status}) during experiment finalization`);
   }
 
   return response.json();
 }
 
 export async function runBacktest(experiment: ResearchExperiment): Promise<BacktestResult> {
-  const response = await fetch(`${API_BASE_URL}/backtest`, {
+  const baseUrl = getApiBaseUrl();
+  const response = await fetch(`${baseUrl}/backtest`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(experiment),
@@ -49,7 +55,7 @@ export async function runBacktest(experiment: ResearchExperiment): Promise<Backt
 
   if (!response.ok) {
     const errorData = await response.json().catch(() => ({ detail: "Failed to execute backtest" }));
-    throw new Error(errorData.detail || "Server error during backtest calculation");
+    throw new Error(errorData.detail || `Server error (${response.status}) during backtest calculation`);
   }
 
   return response.json();
@@ -59,7 +65,8 @@ export async function explainResults(
   experiment: ResearchExperiment,
   backtestResult: BacktestResult
 ): Promise<LearningResult> {
-  const response = await fetch(`${API_BASE_URL}/explain`, {
+  const baseUrl = getApiBaseUrl();
+  const response = await fetch(`${baseUrl}/explain`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ experiment, backtest_result: backtestResult }),
@@ -67,7 +74,7 @@ export async function explainResults(
 
   if (!response.ok) {
     const errorData = await response.json().catch(() => ({ detail: "Failed to generate explanation" }));
-    throw new Error(errorData.detail || "Server error during research synthesis generation");
+    throw new Error(errorData.detail || `Server error (${response.status}) during research synthesis generation`);
   }
 
   return response.json();
