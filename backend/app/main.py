@@ -31,6 +31,15 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+@app.get("/")
+def root():
+    """Root endpoint providing service summary and docs link."""
+    return {
+        "message": "AI Trading Research Assistant API is live",
+        "health": "/health",
+        "docs": "/docs"
+    }
+
 @app.get("/health", response_model=HealthResponse)
 def health_check():
     """Health check endpoint to verify backend server status."""
